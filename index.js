@@ -7,11 +7,10 @@ VotingContract = web3.eth.contract(abi);
 contractInstance = VotingContract.at('0x1395232bb7dd7e3e17ba3d5e433c0f8730a03b9f');
 candidates = {"immigration": "candidate-1", "guns": "candidate-2", "env": "candidate-3"}
 
-function voteForCandidate() {
-  candidateName = $("#candidate").val();
-  contractInstance.voteForCandidate(candidateName, {from: web3.eth.accounts[0]}, function() {
-    let div_id = candidates[candidateName];
-    $("#" + div_id).html(contractInstance.totalVotesFor.call(candidateName).toString());
+function voteForCandidate(candidateKey) {
+  contractInstance.voteForCandidate(candidateKey, {from: web3.eth.accounts[0]}, function() {
+    let div_id = candidates[candidateKey];
+    $("#" + div_id).html(contractInstance.totalVotesFor.call(candidateKey).toString());
   });
 }
 
